@@ -17,6 +17,7 @@ public class MarkTracker {
             System.out.println("Pass status: " + passResults(average));
 
         }
+        findBestResults(group);
     }
     public static double calculateAverage(int[][] group, int student) {
         double average = 0;
@@ -38,5 +39,16 @@ public class MarkTracker {
         else {
             return "passed excellent";
         }
+    }
+    public static void findBestResults(int[][] group) {
+        double best = calculateAverage(group, 0);
+        for (int i = 0; i < group.length ; i++) {
+            double average = calculateAverage(group,i);
+            if(average > best) {
+                best = average;
+            }
+
+        }
+        System.out.println("The best result in group is: " + best);
     }
 }
