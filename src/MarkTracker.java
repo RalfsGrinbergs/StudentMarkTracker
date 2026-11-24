@@ -10,23 +10,27 @@ public class MarkTracker {
                 {8,4,2},
                 {9,9,9}
         };
+        double highestAverage = 0;
 
         for (int student = 0; student < group.length; student++) {
-            double average = calculateAverage(group, student);
+            double average = calculateAverage(group[student]);
             System.out.println("Average for student " + (student +1) + " is: " +average);
             System.out.println("Pass status: " + passResults(average));
-
+            if(average > highestAverage) {
+                highestAverage = average;
+            }
         }
-        System.out.println("The best results in group is: " + findBestResults(group));
-
+        System.out.println("The best result in the group is: " + highestAverage);
     }
-    public static double calculateAverage(int[][] group, int student) {
+
+    public static double calculateAverage(int[] studentGrades) {
         double average = 0;
-        for (int i = 0; i < group[student].length; i++) {
-            average += group[student][i];
+        for (int i = 0; i < studentGrades.length; i++) {
+            average += studentGrades[i];
         }
-        return average / group[student].length;
+        return average / studentGrades.length;
     }
+
     public static String passResults(double average) {
         if(average < MIN_PASS_MARK) {
             return "did not pass";
@@ -41,16 +45,4 @@ public class MarkTracker {
             return "passed excellent";
         }
     }
-    public static double findBestResults(int[][] group) {
-        double best = calculateAverage(group, 0);
-        for (int i = 0; i < group.length ; i++) {
-            double average = calculateAverage(group,i);
-            if(average > best) {
-                best = average;
-            }
-
-        }
-        return best;
-
     }
-}
